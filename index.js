@@ -1,4 +1,15 @@
+
+for(var i=0;i<3;i++){
+    document.getElementsByClassName("output")[i].style.display = "none";
+}
+
+
 function solve(event) {
+
+
+    for(var i=0;i<3;i++){
+        document.getElementsByClassName("output")[i].style.display = "block";
+    }
 
     var a = document.getElementById('at').value.trim();
     var b = document.getElementById('bt').value.trim();
@@ -17,7 +28,7 @@ function solve(event) {
     for(var i=0;i<n;i++){
         obj.push({at: parseInt (atime[i]), bt: parseInt (btime[i]), pid:i ,bt1: parseInt (btime[i])});
     }
-   console.log(obj);
+//    console.log(obj);
     
     (function fcfs() {
 
@@ -55,7 +66,7 @@ function solve(event) {
         avg_tat_time /= n;
         avg_wt_time /= n;
 
-        document.getElementById("fcfs_out").innerHTML = "FCFS: " + avg_wt_time; 
+        document.getElementById("fcfs_out").innerHTML = "Average Waiting time accordnig to First Come First Serve: " + avg_wt_time; 
 
     })();
 
@@ -132,7 +143,7 @@ function solve(event) {
       avg_tat_time /=n;
       avg_wt_time /=n;
 
-       document.getElementById("sjf_out").innerHTML = "SJF : " + avg_wt_time;
+       document.getElementById("sjf_out").innerHTML = "Average Waiting time accordnig to Shortest Job First: " + avg_wt_time;
     })();
   
 
@@ -208,7 +219,7 @@ function solve(event) {
       avg_tat_time /=n;
       avg_wt_time /=n;
 
-       document.getElementById("ljf_out").innerHTML = "LJF : " + avg_wt_time;
+       document.getElementById("ljf_out").innerHTML = "Average Waiting time accordnig to Longest Job First: " + avg_wt_time;
     })();
     
     (function rr() {
@@ -220,7 +231,7 @@ function solve(event) {
              return 1;
          }
          obj.sort(comp);
-        console.log(obj);
+        // console.log(obj);
          var ct = [];
          var tat = [];
          var wt = [];
@@ -279,7 +290,7 @@ function solve(event) {
              }
          obj1.shift();              
         m--;
-        console.log(obj1);
+        // console.log(obj1);
 
          }
          var avg_tat_time=0;
@@ -294,9 +305,9 @@ function solve(event) {
          avg_tat_time /=n;
          avg_wt_time /=n;
 
-         console.log(avg_tat_time, avg_wt_time);
+        //  console.log(avg_tat_time, avg_wt_time);
 
-        document.getElementById("rr_out").innerHTML = "RR  : " + avg_wt_time;
+        // document.getElementById("rr_out").innerHTML = "Average Waiting time accordnig to Round Robbin: " + avg_wt_time;
     })();
 
 
