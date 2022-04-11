@@ -1,23 +1,29 @@
 
-for(var i=0;i<3;i++){
+for(var i=0;i<5;i++){
     document.getElementsByClassName("output")[i].style.display = "none";
 }
 
+document.getElementsByClassName("show_btn")[0].style.display = "none";
 
 function solve(event) {
+    var objx=[];
 
-
-    for(var i=0;i<3;i++){
+    for(var i=0;i<5;i++){
         document.getElementsByClassName("output")[i].style.display = "block";
     }
+    // document.getElementById("ans").style.display = "block";
 
     var a = document.getElementById('at').value.trim();
     var b = document.getElementById('bt').value.trim();
 
+    if(a=="" || b==""){
+        alert("Enter a valid input..");
+        location.reload();
+    }
     var atime = a.split(' ');
     var btime = b.split(' ');
 
-    if (atime.length != btime.length) {
+    if (atime.length != btime.length || atime.length==0 || btime.length ==0) {
         alert("Input is wrong..");
         location.reload();
     }
@@ -26,7 +32,8 @@ function solve(event) {
     var n = atime.length;
     
     for(var i=0;i<n;i++){
-        obj.push({at: parseInt (atime[i]), bt: parseInt (btime[i]), pid:i ,bt1: parseInt (btime[i])});
+        obj.push({at: parseInt (atime[i]), bt: parseInt (btime[i]), pid:i });
+        obj[i].bt1 = obj[i].bt;
     }
 //    console.log(obj);
     
@@ -65,7 +72,7 @@ function solve(event) {
 
         avg_tat_time /= n;
         avg_wt_time /= n;
-
+          objx.push({method:"fcfs",time:avg_wt_time});
         document.getElementById("fcfs_out").innerHTML = "Average Waiting time accordnig to First Come First Serve: " + avg_wt_time; 
 
     })();
@@ -142,7 +149,7 @@ function solve(event) {
         }
       avg_tat_time /=n;
       avg_wt_time /=n;
-
+      objx.push({method:"sfj_out",time:avg_wt_time});
        document.getElementById("sjf_out").innerHTML = "Average Waiting time accordnig to Shortest Job First: " + avg_wt_time;
     })();
   
@@ -218,7 +225,7 @@ function solve(event) {
         }
       avg_tat_time /=n;
       avg_wt_time /=n;
-
+     objx.push({method:"ljf_out",time:avg_wt_time});
        document.getElementById("ljf_out").innerHTML = "Average Waiting time accordnig to Longest Job First: " + avg_wt_time;
     })();
     
@@ -239,6 +246,7 @@ function solve(event) {
          var obj1 = [];
          var vis =[];
          time = obj[0].at;
+        
 
          for(var i=0;i<n;i++){
             vis[i]=0;
@@ -272,11 +280,14 @@ function solve(event) {
              }
              var id = obj1[0].pid;
              if(tq>=obj1[0].bt1){
-                 obj[id].bt1=0;
+                
                 
                  time+=obj1[0].bt1;
+                 obj[id].bt1=0;
+                // console.log(time);
                p++;
-               ct[id] = time;
+               ct[id]=time;
+               obj[id].ct = time;
                  
              }
              else{
@@ -298,6 +309,8 @@ function solve(event) {
            for(var i=0;i<n;i++){
                tat[obj[i].pid] = ct[obj[i].pid] - obj[i].at;
                wt[obj[i].pid] = tat[obj[i].pid] - obj[i].bt;
+               obj[i].wt = wt[obj[i].pid];
+               obj[i].tat = tat[obj[i].pid];
                avg_tat_time+=(tat[obj[i].pid]);
                avg_wt_time+=(wt[obj[i].pid]);
 
@@ -305,11 +318,47 @@ function solve(event) {
          avg_tat_time /=n;
          avg_wt_time /=n;
 
-        //  console.log(avg_tat_time, avg_wt_time);
-
-        // document.getElementById("rr_out").innerHTML = "Average Waiting time accordnig to Round Robbin: " + avg_wt_time;
+         // console.log(avg_tat_time, avg_wt_time);
+        objx.push({method:"rr_out",time:avg_wt_time});
+        document.getElementById("rr_out").innerHTML = "Average Waiting time accordnig to Round Robbin: " + avg_wt_time;
     })();
 
+     console.log(objx);
+     var kx = objx.length;
+     var methodx="";
+      var mx_time = 1000000;
+     for(var i=0;i<kx;i++){
+        if(mx_time>objx[i].time){
+            mx_time = objx[i].time;
+            methodx = objx[i].method;
+        }
+     }
+     var Mx="";
+     console.log(methodx);
+     if(methodx=="fcfs"){
+            Mx = "First Come First Serve";
+     }
+     else if(methodx=="sjf_out"){
+         Mx = "Shortest Job First";
+     }
+     else if(methodx=="ljf_out"){
+         Mx = "Longest Job First";
+     }
+     else if(methodx=="rr_out"){
+         Mx = "Round Robin";
+     }
+     document.getElementById("ans").innerHTML="  " + Mx + " is optimal algorithm for given data set.....";
+
+     for(var i=1;i<5;i++){
+        document.getElementsByClassName("output")[i].style.display = "none";
+    }
+    document.getElementsByClassName("show_btn")[0].style.display = "block";
+}
 
 
+function show(){
+    for(var i=1;i<5;i++){
+        document.getElementsByClassName("output")[i].style.display = "block";
+    }
+    document.getElementsByClassName("show_btn")[0].style.display = "none";
 }
