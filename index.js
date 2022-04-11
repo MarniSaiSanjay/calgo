@@ -73,7 +73,7 @@ function solve(event) {
         avg_tat_time /= n;
         avg_wt_time /= n;
           objx.push({method:"fcfs",time:avg_wt_time});
-        document.getElementById("fcfs_out").innerHTML = "Average Waiting time accordnig to First Come First Serve: " + avg_wt_time; 
+        document.getElementById("fcfs_out").innerHTML = "Average Waiting time according to First Come First Serve: " + avg_wt_time; 
 
     })();
 
@@ -150,7 +150,7 @@ function solve(event) {
       avg_tat_time /=n;
       avg_wt_time /=n;
       objx.push({method:"sfj_out",time:avg_wt_time});
-       document.getElementById("sjf_out").innerHTML = "Average Waiting time accordnig to Shortest Job First: " + avg_wt_time;
+       document.getElementById("sjf_out").innerHTML = "Average Waiting time according to Shortest Job First: " + avg_wt_time;
     })();
   
 
@@ -226,7 +226,7 @@ function solve(event) {
       avg_tat_time /=n;
       avg_wt_time /=n;
      objx.push({method:"ljf_out",time:avg_wt_time});
-       document.getElementById("ljf_out").innerHTML = "Average Waiting time accordnig to Longest Job First: " + avg_wt_time;
+       document.getElementById("ljf_out").innerHTML = "Average Waiting time according to Longest Job First: " + avg_wt_time;
     })();
     
     (function rr() {
@@ -320,7 +320,7 @@ function solve(event) {
 
          // console.log(avg_tat_time, avg_wt_time);
         objx.push({method:"rr_out",time:avg_wt_time});
-        document.getElementById("rr_out").innerHTML = "Average Waiting time accordnig to Round Robbin: " + avg_wt_time;
+        document.getElementById("rr_out").innerHTML = "Average Waiting time according to Round Robbin: " + avg_wt_time;
     })();
 
      console.log(objx);
